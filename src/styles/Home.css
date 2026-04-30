@@ -1,0 +1,266 @@
+/* ================================================= */
+/* ================= HOME PAGE ===================== */
+/* ================================================= */
+
+/* FULL-WIDTH BACKGROUND */
+.home-page {
+  width: 100%;
+  min-height: 100%;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  padding: 32px 0 160px;
+  /* EXTRA bottom space for footer + back-to-top */
+}
+
+/* CONTENT CONTAINER (CONTROLS WIDTH) */
+.home-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ================================================= */
+/* ================= HERO =========================== */
+/* ================================================= */
+.home-hero {
+  text-align: center;
+  margin-bottom: 32px;
+  color: #ffffff;
+}
+
+.home-hero h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.home-hero p {
+  margin-top: 8px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.home-page {
+  padding: 20px;
+  color: white;
+}
+
+.home-hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section {
+  margin-top: 40px;
+}
+
+.horizontal-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+/* ===== CARDS ===== */
+.card {
+  min-width: 220px;
+  background: #1f2a3a;
+  padding: 18px;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Different styles */
+.card.recent {
+  border-left: 4px solid #22c55e;
+}
+
+.card.popular {
+  border-left: 4px solid #f59e0b;
+}
+
+/* ===== CATEGORY ===== */
+
+/* SUBJECT CARD BASE */
+.subject-card {
+  position: relative;
+  background: #0f172a;
+  padding: 14px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+  color: #e2e8f0;
+  transition: color 0.3s ease;
+}
+
+/* TEXT COLOR ON HOVER */
+.subject-card:hover {
+  color: white;
+}
+
+/* LEFT SIDE */
+.subject-card::before,
+.subject-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: #2563eb;
+  z-index: 0;
+  transition: transform 0.4s ease;
+}
+
+/* LEFT ANIMATION */
+.subject-card::before {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+/* RIGHT ANIMATION */
+.subject-card::after {
+  right: 0;
+  transform: translateX(100%);
+}
+
+/* HOVER → BOTH SIDES MOVE TO CENTER */
+.subject-card:hover::before {
+  transform: translateX(0);
+}
+
+.subject-card:hover::after {
+  transform: translateX(0);
+}
+
+/* HERO SWIPER */
+.hero-swiper {
+  margin-bottom: 30px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* SLIDE */
+.hero-slide {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+/* DARK OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: white;
+}
+
+/* TEXT */
+.overlay h1 {
+  font-size: 28px;
+}
+
+.overlay p {
+  margin-top: 5px;
+  color: #cbd5f5;
+}
+
+/* ================================================= */
+/* ================= SMALL HEIGHT DEVICES =========== */
+/* ================================================= */
+/* For devices like 292px height */
+@media (max-height: 600px) {
+  .back-to-top {
+    bottom: calc(150px + env(safe-area-inset-bottom));
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ================================================= */
+/* ================= TABLET ========================= */
+/* ================================================= */
+@media (max-width: 1024px) {
+  .home-container {
+    padding: 0 14px;
+  }
+
+  .home-hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
+/* ================================================= */
+/* ================= MOBILE ========================= */
+/* ================================================= */
+@media (max-width: 600px) {
+  .home-page {
+    padding: 24px 0 200px;
+  }
+
+  .home-container {
+    padding: 0 12px;
+  }
+
+  .subjects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .subject-card {
+    padding: 20px;
+  }
+
+  .home-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .home-hero p {
+    font-size: 1rem;
+  }
+
+  .subject-icon {
+    font-size: 2.4rem;
+  }
+
+  .back-to-top {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* ================================================= */
+/* ================= SMALL MOBILE =================== */
+/* ================================================= */
+@media (max-width: 420px) {
+  .home-container {
+    padding: 0 10px;
+  }
+
+  .home-hero h1 {
+    font-size: 1.75rem;
+  }
+}
+
+/* ================================================= */
+/* ================= LARGE SCREEN / TV ============== */
+/* ================================================= */
+@media (min-width: 1600px) {
+  .home-container {
+    max-width: 1600px;
+  }
+
+  .home-hero h1 {
+    font-size: 2.9rem;
+  }
+}
