@@ -21,7 +21,7 @@ export default function ForgotPassword() {
       setLoading(true);
 
       const res = await fetch(
-        "http://localhost:8081/api/auth/forgot-password", // ✅ USER API
+        "quizbackend-production-a1ec.up.railway.app/api/auth/forgot-password", // ✅ USER API
         {
           method: "POST",
           headers: {
