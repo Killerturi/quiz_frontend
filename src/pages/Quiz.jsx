@@ -57,7 +57,7 @@ export default function Quiz() {
 
   /* ================= FETCH QUESTIONS ================= */
   useEffect(() => {
-    fetch(`quizbackend-production-a1ec.up.railway.app/api/questions/public?setId=${setId}`)
+    fetch(`https://quizbackend-production-a1ec.up.railway.app/api/questions/public?setId=${setId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log("checking....", data)
@@ -243,7 +243,7 @@ export default function Quiz() {
         sessionStorage.getItem("user_token");
 
       // ✅ 1. SAVE ATTEMPT (IMPORTANT)
-      await fetch("quizbackend-production-a1ec.up.railway.app/api/sets/submit", {
+      await fetch("https://quizbackend-production-a1ec.up.railway.app/api/sets/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -53,7 +53,7 @@ export default function ResetPassword() {
       setLoading(true);
 
       const res = await fetch(
-        "quizbackend-production-a1ec.up.railway.app/api/auth/reset-password", // ✅ USER API
+        "https://quizbackend-production-a1ec.up.railway.app/api/auth/reset-password", // ✅ USER API
         {
           method: "POST",
           headers: {

@@ -39,7 +39,7 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await fetch("quizbackend-production-a1ec.up.railway.app/api/login", {
+      const res = await fetch("https://quizbackend-production-a1ec.up.railway.app/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

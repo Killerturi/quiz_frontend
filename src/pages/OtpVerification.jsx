@@ -65,7 +65,7 @@ export default function OtpVerification() {
       setLoading(true);
 
       const res = await fetch(
-        "quizbackend-production-a1ec.up.railway.app/api/auth/verify-otp", // ✅ USER API
+        "https://quizbackend-production-a1ec.up.railway.app/api/auth/verify-otp", // ✅ USER API
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
