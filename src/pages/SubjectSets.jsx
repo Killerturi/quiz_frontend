@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getSetsBySubject } from "../services/set.service";
+import Loader from "../components/Loader";
 
 // ✅ ADD THESE
 const isLoggedIn = () =>
@@ -42,13 +43,7 @@ export default function SubjectSets() {
         loadSets();
     }, [subjectId]);
 
-    if (loading) {
-        return (
-            <div className="min-h-screen flex items-center justify-center text-slate-400">
-                Loading sets...
-            </div>
-        );
-    }
+    if (loading) return <Loader message="Loading Sets" />;
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#020617] text-white px-6 py-10">

@@ -17,6 +17,8 @@ import "prismjs/components/prism-python";
 import "prismjs/components/prism-javascript";
 
 import "../styles/Quiz.css";
+import Loader from "../components/Loader";
+import { getQuestionsBySet } from "../services/question.service";
 
 const MAX_WARNINGS = 3;
 const NEGATIVE_MARK = 1 / 3;
@@ -35,7 +37,7 @@ export default function Quiz() {
   const [review, setReview] = useState({});
   const [visited, setVisited] = useState({});
   const [timeLeft, setTimeLeft] = useState(0);
-
+  const [loading, setLoading] = useState(true);
   const [showInstructions, setShowInstructions] = useState(true);
   const [acceptedRules, setAcceptedRules] = useState(false);
   const [fullscreenStarted, setFullscreenStarted] = useState(false);
@@ -57,27 +59,37 @@ export default function Quiz() {
 
   /* ================= FETCH QUESTIONS ================= */
   useEffect(() => {
-    fetch(`https://quizbackend-production-a1ec.up.railway.app/api/questions/public?setId=${setId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("checking....", data)
-        const mapped = data.questions.map((q) => (
+    const loadQuestions = async () => {
+      try {
+        setLoading(true);
 
-          {
+        const data = await getQuestionsBySet(setId);
 
-            ...q,
-            question: q.title,
-            answer: q.correctAnswer,
-          }));
+        console.log("checking....", data);
+
+        const mapped = data.questions.map((q) => ({
+          ...q,
+          question: q.title,
+          answer: q.correctAnswer,
+        }));
 
         setQuestions(mapped);
         setTimeLeft(Math.ceil(mapped.length * 0.7 * 60));
-        // console.log("checking....", questions);
 
-        // ✅ SUBJECT NAME FROM BACKEND
-        setSubjectName(data.subjectName || mapped[0]?.subjectName || "Subject");
-      })
-      .catch(() => toast.error("Failed to load exam"));
+        // ✅ SUBJECT NAME
+        setSubjectName(
+          data.subjectName || mapped[0]?.subjectName || "Subject"
+        );
+
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to load exam");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (setId) loadQuestions();
   }, [setId]);
 
   useEffect(() => {
@@ -261,6 +273,9 @@ export default function Quiz() {
 
   };
   ;
+  if (loading) {
+    return <Loader message="Loading questions" />;
+  }
 
   /* ================= INSTRUCTIONS ================= */
   if (showInstructions) {
@@ -270,19 +285,27 @@ export default function Quiz() {
         <div className="w-full max-w-lg rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl p-6 relative">
 
           {/* 🔙 BACK BUTTON */}
-          <button
-            onClick={() => navigate(-1)}
-            className="absolute top-4 left-4 text-slate-400 hover:text-white transition text-sm flex items-center gap-1"
-          >
-            ← Back
-          </button>
+          <div className="flex items-center justify-between mb-4">
+            <button
+              onClick={() => navigate(-1)}
+              className="
+      px-3 py-1.5 rounded-lg 
+      bg-slate-800/70 border border-slate-600
+      text-slate-300 text-xs
+      hover:bg-slate-700 hover:text-white
+      transition
+    "
+            >
+              ← Back
+            </button>
+
+            <div className="w-[52px]" /> {/* balance spacing */}
+          </div>
 
           {/* HEADER */}
           <div className="text-center mb-5">
-            <h2 className="text-2xl font-semibold tracking-tight">
-              Exam Instructions
-            </h2>
-            <p className="text-sm text-slate-400 mt-1">
+            <h2 className="text-2xl font-semibold">Exam Instructions</h2>
+            <p className="text-sm text-slate-400">
               Please read carefully before starting
             </p>
           </div>
@@ -320,12 +343,14 @@ export default function Quiz() {
           <button
             disabled={!acceptedRules}
             className={`
-            w-full py-3 rounded-lg font-medium transition
-            ${acceptedRules
-                ? "bg-indigo-600 hover:bg-indigo-700"
-                : "bg-slate-700 text-slate-400 cursor-not-allowed"}
-          `}
+    w-full py-3 rounded-lg font-medium transition
+    ${acceptedRules
+                ? "bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer"
+                : "bg-slate-800 text-slate-500 cursor-not-allowed opacity-60"}
+  `}
             onClick={() => {
+              if (!acceptedRules) return;
+
               document.documentElement.requestFullscreen?.();
               setShowInstructions(false);
               setFullscreenStarted(true);

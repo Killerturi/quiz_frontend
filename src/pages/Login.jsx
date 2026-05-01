@@ -86,74 +86,136 @@ export default function Login() {
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-card">
-        <h2 className="login-title">User Login</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-900 via-slate-950 to-blue-900 px-4">
 
-        <form onSubmit={submit}>
-          {/* EMAIL */}
-          <div className="input-group">
-            <label>Email address</label>
-            <input
-              type="email"
-              placeholder="user@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+      {/* BACKGROUND GLOW */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-indigo-500/20 blur-3xl rounded-full"></div>
+      <div className="absolute bottom-10 right-10 w-72 h-72 bg-blue-500/20 blur-3xl rounded-full"></div>
+
+      <div className="relative w-full max-w-md">
+
+        {/* CARD */}
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 shadow-[0_10px_40px_rgba(0,0,0,0.7)]">
+
+          {/* HEADER */}
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-semibold text-white">
+              Welcome Back 👋
+            </h2>
+            <p className="text-slate-400 text-sm mt-1">
+              Login to continue your journey
+            </p>
           </div>
 
-          {/* PASSWORD */}
-          <div className="input-group">
-            <label>Password</label>
-            <div className="password-box">
+          <form onSubmit={submit} className="space-y-5">
+
+            {/* EMAIL */}
+            <div>
+              <label className="text-xs text-slate-400 mb-1 block">
+                Email
+              </label>
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
+                className="
+                w-full px-4 py-2.5 rounded-xl
+                bg-white/5 border border-white/10
+                text-white placeholder:text-slate-500
+                focus:outline-none focus:border-indigo-400 focus:bg-white/10
+                transition
+              "
               />
+            </div>
+
+            {/* PASSWORD */}
+            <div>
+              <label className="text-xs text-slate-400 mb-1 block">
+                Password
+              </label>
+
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Enter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="
+                  w-full px-4 py-2.5 rounded-xl
+                  bg-white/5 border border-white/10
+                  text-white placeholder:text-slate-500
+                  focus:outline-none focus:border-indigo-400 focus:bg-white/10
+                  transition
+                "
+                />
+
+                <span
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-slate-400 hover:text-white"
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </span>
+              </div>
+            </div>
+
+            {/* OPTIONS */}
+            <div className="flex items-center justify-between text-sm">
+
+              <label className="flex items-center gap-2 text-slate-300 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
+                  className="accent-indigo-500"
+                />
+                Remember me
+              </label>
+
               <span
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => navigate("/forgot-password")}
+                className="text-indigo-400 hover:text-indigo-300 cursor-pointer"
               >
-                {showPassword ? "🙈" : "👁️"}
+                Forgot?
               </span>
             </div>
-          </div>
 
-          {/* OPTIONS */}
-          <div className="options-row">
-            <label className="remember">
-              <input
-                type="checkbox"
-                checked={remember}
-                onChange={(e) => setRemember(e.target.checked)}
-              />
-              <span>Remember Me</span>
-            </label>
+            {/* ERROR */}
+            {error && (
+              <div className="text-red-400 text-sm text-center">
+                {error}
+              </div>
+            )}
 
-            <span
-              className="forgot"
-              role="button"
-              onClick={() => navigate("/forgot-password")}
+            {/* BUTTON */}
+            <button
+              type="submit"
+              className="
+              w-full py-3 rounded-xl font-semibold
+              bg-gradient-to-r from-indigo-500 to-blue-500
+              hover:scale-[1.02] active:scale-95
+              transition-all duration-200
+              shadow-lg hover:shadow-indigo-500/30
+            "
             >
-              Forgot password?
-            </span>
-          </div>
+              Login →
+            </button>
 
-          {error && <div className="error-msg">{error}</div>}
+            {/* REGISTER */}
+            <div className="text-center text-sm text-slate-400">
+              Don’t have an account?{" "}
+              <span
+                onClick={() => navigate("/register")}
+                className="text-indigo-400 hover:text-indigo-300 cursor-pointer"
+              >
+                Register
+              </span>
+            </div>
 
-          <button type="submit" className="login-btn">
-            Login →
-          </button>
-
-          <div className="register">
-            Don’t have an account?
-            <span onClick={() => navigate("/register")}> Register</span>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

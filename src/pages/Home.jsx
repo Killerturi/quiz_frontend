@@ -129,7 +129,7 @@ export default function Home() {
 
                 <button
                   onClick={() => (window.location.href = "/login")}
-                  className="px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/30"
+                  className="px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-500 to-blue-500 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-indigo-500/30 "
                 >
                   Login & Start 🚀
                 </button>

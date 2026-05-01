@@ -70,20 +70,21 @@ body {
 
 /* ================= loader ================= */
 /* TICKS */
+/* ================= CLOCK TICKS ================= */
 .tick {
   position: absolute;
   width: 2px;
-  height: 6px;
+  height: 8px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 2px;
   opacity: 0.6;
 }
 
-/* HAND */
+/* ================= HAND ================= */
 .hand {
   position: absolute;
   width: 2px;
-  height: 32px;
+  height: 45px;
 
   background: linear-gradient(to top, #6366f1, transparent);
 
@@ -97,13 +98,13 @@ body {
 
   animation: rotateHand 1.2s linear infinite;
 
-  box-shadow: 0 0 10px #6366f1;
+  box-shadow: 0 0 12px #6366f1;
 }
 
-/* CENTER */
+/* ================= CENTER DOT ================= */
 .center-dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   background: white;
   border-radius: 50%;
 
@@ -112,10 +113,10 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 
-  box-shadow: 0 0 6px white;
+  box-shadow: 0 0 8px white;
 }
 
-/* ROTATION */
+/* ================= ROTATION ================= */
 @keyframes rotateHand {
   from {
     transform: translate(-50%, -100%) rotate(0deg);
@@ -123,6 +124,37 @@ body {
 
   to {
     transform: translate(-50%, -100%) rotate(360deg);
+  }
+}
+
+/* ================= DOT ANIMATION ================= */
+.dots span {
+  opacity: 0;
+  animation: blink 1.4s infinite;
+}
+
+.dots span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+
+  0%,
+  80%,
+  100% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
   }
 }
 
@@ -168,6 +200,18 @@ button:focus {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+
+/* ===== MODAL SCROLL LOCK ===== */
+body.modal-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* prevent layout shift when scrollbar disappears */
+body.modal-open {
+  padding-right: var(--scrollbar-comp, 0px);
 }
 
 /* ================= LARGE SCREENS / TV ================= */
