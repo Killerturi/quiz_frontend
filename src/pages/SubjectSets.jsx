@@ -131,7 +131,7 @@ export default function SubjectSets() {
                                     <img
                                         src={icons[level]}
                                         alt={level}
-                                        className="w-10 h-10 object-contain"
+                                        className="w-10 h-10 object-contain animate-pulse"
                                     />
                                 </div>
 

@@ -130,13 +130,13 @@ export default function Home() {
   ">
 
                     {/* GLOW */}
-                    <div className="absolute inset-0 rounded-2xl bg-indigo-500/10 blur-xl"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-indigo-500/10 blur-xl "></div>
 
                     {/* ICON */}
                     <img
                       src="/progress.png"
                       alt="progress"
-                      className="relative w-10 h-10 sm:w-10 sm:h-10 object-contain"
+                      className="relative w-10 h-10 sm:w-10 sm:h-10 object-contain animate-pulse"
                     />
 
                   </div>
