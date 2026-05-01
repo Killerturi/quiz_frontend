@@ -16,7 +16,7 @@ export default function CategorySection({
                 🚀 <span>Explore Categories</span>
             </h2>
 
-            <div className="space-y-5">
+            <div className="space-y-6">
 
                 {categories.map((cat, i) => (
                     <motion.div
@@ -27,23 +27,23 @@ export default function CategorySection({
                         viewport={{ once: true }}
                         className="
               relative rounded-2xl 
-              bg-gradient-to-br from-slate-900/80 to-slate-800/60 
+              bg-gradient-to-br from-slate-900/90 to-slate-800/70 
               backdrop-blur-xl 
               border border-white/10 
-              p-4 sm:p-5 
-              shadow-[0_10px_30px_rgba(0,0,0,0.6)]
+              p-5
+              shadow-[0_12px_30px_rgba(0,0,0,0.7)]
               overflow-hidden
             "
                     >
 
-                        {/* SOFT GLOW */}
-                        <div className="absolute -top-10 -right-10 w-28 h-28 bg-indigo-500/10 blur-2xl rounded-full"></div>
+                        {/* GLOW */}
+                        <div className="absolute -top-12 -right-12 w-32 h-32 bg-indigo-500/10 blur-3xl rounded-full"></div>
 
                         {/* HEADER */}
-                        <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-start justify-between gap-3 mb-5">
 
-                            <div>
-                                <h3 className="text-base sm:text-lg font-semibold text-white tracking-wide">
+                            <div className="min-w-0">
+                                <h3 className="text-base font-semibold text-white leading-tight break-words">
                                     {cat.displayName}
                                 </h3>
 
@@ -55,9 +55,11 @@ export default function CategorySection({
                             <button
                                 onClick={() => setSelectedCategory(cat)}
                                 className="
-                  text-xs px-3 py-1.5 rounded-full 
+                  shrink-0
+                  text-xs px-3 py-2 rounded-xl 
                   bg-white/10 hover:bg-white/20 
-                  text-white transition
+                  text-white 
+                  transition
                   backdrop-blur
                 "
                             >
@@ -68,7 +70,7 @@ export default function CategorySection({
 
                         {/* SUBJECT CHIPS */}
                         <motion.div
-                            className="flex gap-2 overflow-x-auto pb-1"
+                            className="flex gap-2 overflow-x-auto pb-1 no-scrollbar"
                             initial="hidden"
                             whileInView="visible"
                             viewport={{ once: true }}
@@ -89,12 +91,13 @@ export default function CategorySection({
                                     whileTap={{ scale: 0.95 }}
                                     className="
                     shrink-0 px-4 py-2.5 rounded-xl 
-                    bg-white/5 hover:bg-white/10 
+                    bg-gradient-to-br from-white/10 to-white/5
                     border border-white/10 
                     text-xs text-white 
                     cursor-pointer 
                     transition-all duration-200
-                    backdrop-blur
+                    hover:bg-white/15
+                    active:scale-95
                   "
                                 >
                                     {sub.displayName}
