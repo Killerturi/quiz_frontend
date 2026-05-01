@@ -57,7 +57,7 @@ export default function SubjectSets() {
                     ← Back
                 </button>
 
-                <h1 className="text-3xl font-bold mb-2 tracking-tight">
+                <h1 className="text-xl sm:text-2xl font-bold mb-1">
                     Choose Your Challenge 🚀
                 </h1>
 
@@ -81,24 +81,21 @@ export default function SubjectSets() {
                     };
 
                     const icons = {
-                        easy: "🟢",
-                        medium: "🟡",
-                        hard: "🔴",
+                        easy: "/easy.png",
+                        medium: "/medium.png",
+                        hard: "/hard.png",
                     };
-
                     return (
                         <div
                             key={set._id}
                             onClick={() => {
                                 if (isDisabled) return;
 
-                                // 🔐 LOGIN CHECK
                                 if (!isLoggedIn()) {
                                     navigate("/login");
                                     return;
                                 }
 
-                                // 🔒 PREMIUM CHECK
                                 if (isHard && !isPremiumUser()) {
                                     setSelectedSet(set);
                                     setShowModal(true);
@@ -108,61 +105,77 @@ export default function SubjectSets() {
                                 navigate(`/quiz/${set._id}`);
                             }}
                             className={`
-                relative
-                p-6 rounded-2xl border backdrop-blur-md transition-all duration-300
-                ${isDisabled
-                                    ? "bg-slate-800/40 border-slate-700 cursor-not-allowed opacity-50"
-                                    : `cursor-pointer bg-gradient-to-br ${styles[level] ||
-                                    "from-slate-700/10 to-slate-900/10"
-                                    } hover:-translate-y-2 hover:shadow-2xl`
+    relative group
+    p-5 rounded-2xl border
+    backdrop-blur-xl transition-all duration-300
+    ${isDisabled
+                                    ? "bg-slate-800/40 border-slate-700 opacity-50 cursor-not-allowed"
+                                    : "cursor-pointer bg-gradient-to-br from-slate-900/80 to-slate-800/60 border-white/10 hover:-translate-y-1 active:scale-[0.98]"
                                 }
-              `}
+  `}
                         >
 
-                            {/* 🔒 PREMIUM BADGE */}
+
+
+                            {/* PREMIUM BADGE */}
                             {isHard && !isPremiumUser() && (
-                                <div className="absolute top-3 right-3 text-xs bg-red-500/20 text-red-300 px-2 py-1 rounded-full">
+                                <div className="absolute top-3 right-3 text-[10px] bg-red-500/20 text-red-300 px-2 py-1 rounded-full">
                                     🔒 Premium
                                 </div>
                             )}
 
-                            {/* ICON */}
-                            <div className="text-3xl mb-4">
-                                {icons[level] || "📘"}
+                            {/* CONTENT */}
+                            <div className="mt-2">
+
+                                <div className="mb-4 w-15 h-15 rounded-xl bg-white/5 flex items-center justify-center border border-white/10">
+                                    <img
+                                        src={icons[level]}
+                                        alt={level}
+                                        className="w-10 h-10 object-contain"
+                                    />
+                                </div>
+
+                                {/* LEVEL TITLE */}
+                                <h2 className="text-lg font-semibold tracking-wide">
+                                    {(set.displayName || set.name || "Set").toUpperCase()}
+                                </h2>
+
+                                {/* DESCRIPTION */}
+                                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                                    {level === "easy" && "Beginner friendly questions"}
+                                    {level === "medium" && "Moderate difficulty questions"}
+                                    {level === "hard" && "Advanced level challenge"}
+                                </p>
+
+                                {/* COUNT */}
+                                <p className="text-xs mt-2 text-slate-500">
+                                    {set.questionCount} questions
+                                </p>
+
+                                {/* CTA */}
+                                <div className="mt-4">
+                                    {isDisabled ? (
+                                        <span className="text-red-400 text-xs">
+                                            No questions available
+                                        </span>
+                                    ) : (
+                                        <div
+                                            className={`
+            inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs font-medium
+            ${isHard && !isPremiumUser()
+                                                    ? "bg-red-500/10 text-red-300"
+                                                    : "bg-indigo-500/10 text-indigo-300"
+                                                }
+          `}
+                                        >
+                                            {isHard && !isPremiumUser()
+                                                ? "Unlock Premium →"
+                                                : "Start Test →"}
+                                        </div>
+                                    )}
+                                </div>
+
                             </div>
-
-                            {/* TITLE */}
-                            <h2 className="text-xl font-semibold mb-1">
-                                {(set.displayName || set.name || "Set").toUpperCase()}
-                            </h2>
-
-                            {/* SUBTEXT */}
-                            <p className="text-sm text-slate-400">
-                                {level === "easy" && "Beginner friendly questions"}
-                                {level === "medium" && "Moderate difficulty questions"}
-                                {level === "hard" && "Challenging advanced questions"}
-                            </p>
-
-                            {/* COUNT */}
-                            <p className="text-xs mt-2 text-slate-500">
-                                {set.questionCount} questions
-                            </p>
-
-                            {/* CTA */}
-                            <div className="mt-4 text-sm">
-                                {isDisabled ? (
-                                    <span className="text-red-400">
-                                        No questions available
-                                    </span>
-                                ) : (
-                                    <span className="text-indigo-400">
-                                        {isHard && !isPremiumUser()
-                                            ? "Unlock Premium →"
-                                            : "Start Test →"}
-                                    </span>
-                                )}
-                            </div>
-
                         </div>
                     );
                 })}

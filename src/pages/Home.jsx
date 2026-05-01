@@ -89,7 +89,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {recentExams.length > 0 ? (
-              <ExamSection title="Continue Your Journey" exams={recentExams} type="recent"/>
+              <ExamSection title="Continue Your Journey" exams={recentExams} type="recent" />
             ) : isLoggedIn ? (
               <div className="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-10 text-center shadow-lg">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-3">
@@ -117,7 +117,31 @@ export default function Home() {
                 <div className="absolute -top-10 -left-10 w-40 h-40 bg-indigo-500/20 blur-3xl rounded-full"></div>
                 <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-500/20 blur-3xl rounded-full"></div>
 
-                <div className="text-4xl mb-4 animate-pulse">🚀</div>
+                <div className="flex justify-center mb-6">
+
+                  <div className="
+    relative
+    w-18 h-18 sm:w-20 sm:h-20
+    flex items-center justify-center
+    rounded-2xl
+    bg-gradient-to-br from-indigo-500/10 to-blue-500/10
+    border border-white/10
+    shadow-[0_0_40px_rgba(99,102,241,0.2)]
+  ">
+
+                    {/* GLOW */}
+                    <div className="absolute inset-0 rounded-2xl bg-indigo-500/10 blur-xl"></div>
+
+                    {/* ICON */}
+                    <img
+                      src="/progress.png"
+                      alt="progress"
+                      className="relative w-10 h-10 sm:w-10 sm:h-10 object-contain"
+                    />
+
+                  </div>
+
+                </div>
 
                 <h2 className="text-2xl sm:text-3xl font-bold mb-3">
                   Track Your Progress
