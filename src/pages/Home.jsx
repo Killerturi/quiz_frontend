@@ -89,7 +89,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {recentExams.length > 0 ? (
-              <ExamSection title="Continue Your Journey" exams={recentExams} />
+              <ExamSection title="Continue Your Journey" exams={recentExams} type="recent"/>
             ) : isLoggedIn ? (
               <div className="bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 rounded-2xl p-10 text-center shadow-lg">
                 <h2 className="text-2xl sm:text-3xl font-bold mb-3">

@@ -5,9 +5,6 @@ import { isLoggedIn, isPremiumUser } from "../utils/subscription";
 export default function ExamSection({ title, exams = [], type = "default" }) {
     const navigate = useNavigate();
 
-
-
-
     return (
         <section className="section mt-10">
             <h2 className="text-lg font-semibold mb-4">{title}</h2>
@@ -32,9 +29,9 @@ export default function ExamSection({ title, exams = [], type = "default" }) {
                         {/* CONTENT */}
                         {type === "recent" ? (
                             <>
-                                {/* // <p className="text-sm text-gray-300 mb-3">
-                            //     Score: {exam.score}/{exam.total}
-                            // </p> */}
+                                <p className="text-sm text-gray-300 mb-3">
+                                    Score: {exam.score}/{exam.total}
+                                </p>
                             </>
                         ) : (
                             <p className="text-sm text-gray-300 mb-3">
